@@ -51,7 +51,7 @@ const SelectTokenModal: FC<SelectTokenModalProps> = ({
       borderRadius="xs"
       flexDirection="column"
       boxShadow="0 0 5px #3334"
-      width={['100%', '25rem']}
+      width={['100%', '28rem']}
       maxWidth={['25rem', 'unset']}
       transition={{ duration: 0.3 }}
     >
