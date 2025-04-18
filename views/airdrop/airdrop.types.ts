@@ -17,7 +17,7 @@ export interface AirdropData {
   amount: string;
 }
 
-export type TMethod = 'csv' | 'nft' | 'addressList' | 'suiPlay';
+export type TMethod = /*'csv' | */ 'nft' | 'addressList' | 'suiPlay';
 
 export interface IAirdropForm {
   step: number;
