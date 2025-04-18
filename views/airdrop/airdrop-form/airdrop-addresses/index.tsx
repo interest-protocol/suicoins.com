@@ -6,7 +6,6 @@ import { IAirdropForm } from '../../airdrop.types';
 import AirdropAddressesListMethod from './airdrop-address-list-method';
 import AirdropNftMethod from './airdrop-nft-method';
 import AirdropSuiPlayHoldersMethod from './airdrop-sui-play-holders';
-import AirdropUploadCSV from './airdrop-upload-csv';
 
 const AirdropAddresses: FC = () => {
   const { control } = useFormContext<IAirdropForm>();
@@ -24,7 +23,7 @@ const AirdropAddresses: FC = () => {
       bg="lowestContainer"
       flexDirection="column"
     >
-      {method === 'csv' && <AirdropUploadCSV />}
+      {/*method === 'csv' && <AirdropUploadCSV />*/}
       {method === 'nft' && <AirdropNftMethod />}
       {method === 'suiPlay' && <AirdropSuiPlayHoldersMethod />}
       {method === 'addressList' && <AirdropAddressesListMethod />}

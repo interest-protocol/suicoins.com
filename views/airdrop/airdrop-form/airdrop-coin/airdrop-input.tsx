@@ -5,7 +5,6 @@ import { useModal } from '@/hooks/use-modal';
 
 import { AirdropCoinProps, IAirdropForm } from '../../airdrop.types';
 import AirdropPreviewModal from '../airdrop-preview-modal';
-import AirdropCommonAmountField from './airdrop-common-amount-field';
 import AirdropPreviewButton from './airdrop-preview-button';
 
 const AirdropInput: FC<AirdropCoinProps> = ({ setIsProgressView }) => {
@@ -28,7 +27,7 @@ const AirdropInput: FC<AirdropCoinProps> = ({ setIsProgressView }) => {
 
   return (
     <>
-      {method !== 'csv' && <AirdropCommonAmountField />}
+      {/*method !== 'csv' && <AirdropCommonAmountField />*/}
       <AirdropPreviewButton handleOpenSummaryModal={handleOpenSummaryModal} />
     </>
   );

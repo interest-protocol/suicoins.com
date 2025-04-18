@@ -29,7 +29,6 @@ const AirdropPreviewButton: FC<AirdropPreviewButtonProps> = ({
   const { control } = useFormContext<IAirdropForm>();
 
   const token = useWatch({ control, name: 'token' });
-  const method = useWatch({ control, name: 'method' });
   const airdropList = useWatch({ control, name: 'airdropList' });
   const commonAmount = useWatch({ control, name: 'commonAmount' });
   const amountForAll = useWatch({ control, name: 'amountForAll' });
@@ -53,12 +52,11 @@ const AirdropPreviewButton: FC<AirdropPreviewButtonProps> = ({
       : 0;
 
     if (!currentAmount) {
-      if (method != 'csv') {
-        setIsError({
-          state: false,
-        });
-        return true;
-      }
+      //if (method != 'csv')
+      setIsError({
+        state: false,
+      });
+      return true;
     }
 
     const tokenBalance = FixedPointMath.toNumber(
