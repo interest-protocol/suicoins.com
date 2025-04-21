@@ -10,6 +10,7 @@ export const NFT: ReadonlyArray<string> = [
   '67aca668-31b0-4713-91cf-079d392b041a', // Kumo
   'f398dbda-3a2d-45f3-8e76-1557b386dfbe', // Blubbers
   'cb2e0bfd-84b1-41cb-b492-bf25078431f1', // AEON
+  '79238543-5a4d-4944-a301-27ce8bf640c6', // PUGWIF PFP
   '37569e2d-03e4-4bfb-ab55-0dae8943e6d3', // DoubleUp Citizen
   '4b7f929a-2ae8-417a-8e07-ef6d5eb4f1d7', // Rinoco
   'e15727d4-4cfd-44de-8b71-abe103c1549a', // Sweebs
