@@ -9,12 +9,11 @@ import { IAirdropForm } from '../../../airdrop.types';
 import { csvToAirdrop } from '../../../airdrop.utils';
 import AirdropUploadFileCard from './airdrop-upload-file-card';
 
-const AirdropUploadFile: FC = () => {
+const AirdropUploadCSV: FC = () => {
   const { colors } = useTheme() as Theme;
   const [dragging, setDragging] = useState(false);
   const { setValue, control } = useFormContext<IAirdropForm>();
 
-  const decimals = useWatch({ control, name: 'token.decimals' });
   const airdropList = useWatch({ control, name: 'airdropList' });
 
   const handleChangeFile: ChangeEventHandler<HTMLInputElement> = async (e) => {
@@ -25,7 +24,7 @@ const AirdropUploadFile: FC = () => {
     if (file.type !== 'text/csv')
       return toast.error('Make sure that you are sending a CSV File');
 
-    const airdrop = csvToAirdrop(await file.text(), decimals, toast.error);
+    const airdrop = csvToAirdrop(await file.text(), toast.error);
 
     setValue('airdropList', airdrop);
     setValue('step', 2);
@@ -44,7 +43,7 @@ const AirdropUploadFile: FC = () => {
 
       if (!file) return toast.error('Something went wrong');
 
-      const airdrop = csvToAirdrop(await file.text(), decimals, toast.error);
+      const airdrop = csvToAirdrop(await file.text(), toast.error);
       setValue('airdropList', airdrop);
       setValue('step', 2);
       return;
@@ -57,7 +56,7 @@ const AirdropUploadFile: FC = () => {
     if (file.type !== 'text/csv')
       return toast.error('Make sure that you are sending a CSV File');
 
-    const airdrop = csvToAirdrop(await file.text(), decimals, toast.error);
+    const airdrop = csvToAirdrop(await file.text(), toast.error);
     setValue('airdropList', airdrop);
     setValue('step', 2);
   };
@@ -136,4 +135,4 @@ const AirdropUploadFile: FC = () => {
   );
 };
 
-export default AirdropUploadFile;
+export default AirdropUploadCSV;

@@ -1,6 +1,5 @@
 import { Box, Motion, Typography } from '@interest-protocol/ui-kit';
 import BigNumber from 'bignumber.js';
-import Image from 'next/image';
 import { FC } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
 

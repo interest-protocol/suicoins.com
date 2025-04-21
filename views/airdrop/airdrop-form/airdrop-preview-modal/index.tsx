@@ -27,17 +27,20 @@ const AirdropPreviewModal: FC<AirdropPreviewModalProps> = ({
     control,
     name: 'token',
   });
+
   const usdPrice = useWatch({ control, name: 'tokenUSDPrice' });
   const airdropList = useWatch({ control, name: 'airdropList' });
 
   const total = airdropList
-    ? FixedPointMath.toNumber(
-        airdropList?.reduce(
-          (acc, { amount }) => acc.plus(BigNumber(amount)),
-          BigNumber(0)
-        ),
-        decimals
-      )
+    ? method === 'csv'
+      ? airdropList.reduce((acc, { amount }) => acc + Number(amount), 0)
+      : FixedPointMath.toNumber(
+          airdropList?.reduce(
+            (acc, { amount }) => acc.plus(BigNumber(amount)),
+            BigNumber(0)
+          ),
+          decimals
+        )
     : 0;
 
   return (
@@ -49,9 +52,9 @@ const AirdropPreviewModal: FC<AirdropPreviewModalProps> = ({
       borderRadius="xs  "
       alignItems="center"
       display="inline-flex"
-      justifyContent="space-between"
       flexDirection="column"
       boxShadow="dropShadow.2xl"
+      justifyContent="space-between"
       backgroundColor="lowestContainer"
     >
       <Box width="100%">
@@ -92,21 +95,49 @@ const AirdropPreviewModal: FC<AirdropPreviewModalProps> = ({
             alignItems="center"
             justifyContent="space-between"
           >
-            <Box display="flex" alignItems="center" gap="m">
+            <Box
+              gap="xs"
+              display="flex"
+              alignItems="center"
+              justifyContent="space-between"
+            >
               <TokenIcon
                 type={type}
                 symbol={symbol}
                 url={metadata.iconUrl}
                 network={network as Network}
               />
-              <Typography size="small" variant="title">
+              <Typography
+                size="small"
+                variant="title"
+                maxWidth="12ch"
+                overflowX="hidden"
+                overflowY="hidden"
+                whiteSpace="nowrap"
+                fontFamily="Satoshi"
+                textOverflow="ellipsis"
+              >
                 {symbol}
               </Typography>
             </Box>
             <Box textAlign="right">
-              <Typography size="medium" variant="body">
-                {formatMoney(total)} {getSymbol(symbol, type)}
-              </Typography>
+              <Box>
+                <Typography size="medium" variant="body">
+                  {formatMoney(total)}
+                </Typography>
+                <Typography
+                  size="medium"
+                  variant="body"
+                  maxWidth="12ch"
+                  overflowX="hidden"
+                  overflowY="hidden"
+                  whiteSpace="nowrap"
+                  fontFamily="Satoshi"
+                  textOverflow="ellipsis"
+                >
+                  {getSymbol(symbol, type)}
+                </Typography>
+              </Box>
               <Typography variant="body" size="small" color="#000000A3">
                 {usdPrice ? formatMoney(usdPrice * total) : '--'} USD
               </Typography>

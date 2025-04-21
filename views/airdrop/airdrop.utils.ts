@@ -8,7 +8,6 @@ import { AirdropData } from './airdrop.types';
 
 export const csvToAirdrop = (
   csv: string,
-  decimals: number,
   onError: (message: string) => void
 ): ReadonlyArray<AirdropData> => {
   try {
@@ -26,9 +25,7 @@ export const csvToAirdrop = (
           ...acc,
           {
             address,
-            amount: FixedPointMath.toBigNumber(value, decimals)
-              .decimalPlaces(0)
-              .toString(),
+            amount: value,
           },
         ];
 

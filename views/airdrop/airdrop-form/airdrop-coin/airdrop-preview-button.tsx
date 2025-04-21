@@ -38,27 +38,31 @@ const AirdropPreviewButton: FC<AirdropPreviewButtonProps> = ({
   });
 
   const isDisabled = useMemo(() => {
-    const totalAirdropAmount = FixedPointMath.toNumber(
-      (airdropList || []).reduce(
-        (acc, { amount }) => acc.plus(BigNumber(amount == 'NaN' ? 0 : amount)),
-        ZERO_BIG_NUMBER
-      )
-    );
+    if (!airdropList?.length) return true;
+
+    const totalAirdropAmount =
+      method === 'csv'
+        ? (airdropList?.reduce((acc, { amount }) => acc + Number(amount), 0) ??
+          0)
+        : FixedPointMath.toNumber(
+            (airdropList || []).reduce(
+              (acc, { amount }) =>
+                acc.plus(BigNumber(amount == 'NaN' ? 0 : amount)),
+              ZERO_BIG_NUMBER
+            )
+          );
 
     const airdropSize = (airdropList || []).length;
+
     const currentAmount = commonAmount
       ? +(Number(commonAmount) / (amountForAll ? airdropSize : 1)).toFixed(
           token?.decimals
         )
       : 0;
 
-    if (!currentAmount) {
-      if (method != 'csv') {
-        setIsError({
-          state: false,
-        });
-        return true;
-      }
+    if (!currentAmount && method != 'csv') {
+      setIsError({ state: false });
+      return true;
     }
 
     const tokenBalance = FixedPointMath.toNumber(

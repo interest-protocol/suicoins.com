@@ -20,6 +20,7 @@ import { useGetExplorerUrl } from '@/hooks/use-get-explorer-url';
 import { useModal } from '@/hooks/use-modal';
 import { useNetwork } from '@/hooks/use-network';
 import { useWeb3 } from '@/hooks/use-web3';
+import { FixedPointMath } from '@/lib';
 import {
   getCoins,
   isSui,
@@ -64,7 +65,18 @@ const AirdropConfirmButton: FC<AirdropConfirmButtonProps> = ({
     handleClose();
 
     try {
-      const { airdropList, token, method } = getValues();
+      const { airdropList: aList, token, method } = getValues();
+
+      const airdropList =
+        method === 'csv'
+          ? aList?.map((item) => ({
+              ...item,
+              amount: FixedPointMath.toBigNumber(
+                item.amount,
+                token.decimals
+              ).toFixed(0),
+            }))
+          : aList;
 
       const feePerAddress =
         feeFree && query['discount'] === 'free'
