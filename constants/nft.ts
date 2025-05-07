@@ -16,4 +16,5 @@ export const NFT: ReadonlyArray<string> = [
   'e15727d4-4cfd-44de-8b71-abe103c1549a', // Sweebs
   'c8711a2b-6c54-4bc2-809e-8c18e4965c67', // Doonies
   '2dee0596-42f7-46e7-a197-d40da2991c22', // LOFI - Mystic Yetis
+  '4248c650-3899-4fe3-93b6-e2bc60a9a45c', // Puggies
 ];
