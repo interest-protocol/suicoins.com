@@ -13,7 +13,7 @@ const Provider: FC<PropsWithChildren> = ({ children }) => (
   <ThemeManager>
     <QueryClientProvider client={queryClient}>
       <NetworkProvider>
-        <WalletProvider autoConnect stashedWallet={{ name: 'Sui Coins' }}>
+        <WalletProvider autoConnect>
           <SuiNsProvider>{children}</SuiNsProvider>
         </WalletProvider>
       </NetworkProvider>
