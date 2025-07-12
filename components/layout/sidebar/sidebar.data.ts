@@ -7,7 +7,7 @@ import {
   SUI_TERMINAL_EXTERNAL_LINK,
 } from '@/constants';
 import {
-  AirdropSVG,
+  //AirdropSVG,
   CirclePlusSVG,
   DoubleChevronSVG,
   FireSVG,
@@ -41,13 +41,13 @@ export const SIDEBAR_ITEMS: ReadonlyArray<IMenuItem> = [
     path: Routes[RoutesEnum.CreateCoin],
     networks: [Network.MAINNET, Network.TESTNET],
   },
-  {
+  /*{
     name: 'airdrop',
     disabled: false,
     Icon: AirdropSVG,
     path: Routes[RoutesEnum.Airdrop],
     networks: [Network.MAINNET, Network.TESTNET],
-  },
+  },*/
   {
     Icon: FireSVG,
     disabled: false,
