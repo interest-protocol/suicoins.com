@@ -5,7 +5,7 @@ import { SocialLinkProps } from './social-link.types';
 export const SOCIAL_LINK: ReadonlyArray<SocialLinkProps> = [
   {
     title: 'Discord',
-    pathname: 'https://discord.com/invite/interestprotocol',
+    pathname: 'https://discord.com/invite/interestlabs',
     Icon: DiscordSVG,
   },
   {
