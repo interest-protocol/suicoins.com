@@ -9,20 +9,17 @@ import { Transaction } from '@mysten/sui/transactions';
 import { FC } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
 import invariant from 'tiny-invariant';
-import { useReadLocalStorage } from 'usehooks-ts';
 
 import { ExplorerMode } from '@/constants';
-import { DELEGATEE, SENTINEL_API_URI } from '@/constants/dca';
+import { DELEGATEE } from '@/constants/dca';
 import { DCA_FEE_PERCENTAGE } from '@/constants/fees';
 import { useFeeFreeTokens } from '@/hooks/use-dca';
 import useDcaSdk from '@/hooks/use-dca-sdk';
 import { useDialog } from '@/hooks/use-dialog';
 import { useGetExplorerUrl } from '@/hooks/use-get-explorer-url';
-import { useNetwork } from '@/hooks/use-network';
 import { FixedPointMath } from '@/lib';
 import {
   getCoinOfValue,
-  getObjectIdsFromTxResult,
   signAndExecute,
   throwTXIfNotSuccessful,
   ZERO_BIG_NUMBER,
@@ -30,13 +27,11 @@ import {
 
 import SuccessModal from '../components/success-modal';
 import SuccessModalTokenCard from '../components/success-modal/success-modal-token-card';
-import { LOCAL_STORAGE_TOP_KEY } from '../send/send.data';
 import { DCAMessagesEnum } from './dca.data';
-import { Aggregator, DCAForm } from './dca.types';
+import { DCAForm } from './dca.types';
 
 const DCAButton: FC = () => {
   const dcaSdk = useDcaSdk();
-  const network = useNetwork();
   const suiClient = useSuiClient();
   const formDCA = useFormContext<DCAForm>();
   const currentAccount = useCurrentAccount();
@@ -44,11 +39,6 @@ const DCAButton: FC = () => {
   const { dialog, handleClose } = useDialog();
   const signTransaction = useSignTransaction();
   const { data, isLoading, error } = useFeeFreeTokens();
-  const aggregator =
-    useReadLocalStorage<Aggregator>(
-      `${LOCAL_STORAGE_TOP_KEY}-suicoins-dca-aggregator`
-    ) ?? Aggregator.Aftermath;
-
   const resetInput = () => {
     formDCA.setValue('from.display', '0');
     formDCA.setValue('from.value', ZERO_BIG_NUMBER);
@@ -146,26 +136,6 @@ const DCAButton: FC = () => {
 
       throwTXIfNotSuccessful(txResult);
       formDCA.setValue('executionTime', txResult.time);
-
-      const createdObjects = getObjectIdsFromTxResult(txResult, 'created');
-
-      const dcaId = createdObjects[1] ?? createdObjects[0];
-
-      const body = JSON.stringify({
-        dcaId,
-        inputCoinType: from.type,
-        outputCoinType: to.type,
-        aggregator: aggregator ?? Aggregator.Aftermath,
-        ...(recipient && { recipient }),
-      });
-
-      await fetch(`${SENTINEL_API_URI[network]}dcas`, {
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json',
-        },
-        body,
-      });
 
       formDCA.setValue(
         'explorerLink',
