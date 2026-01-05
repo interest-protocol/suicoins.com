@@ -1,4 +1,4 @@
-import { Box, Typography } from '@interest-protocol/ui-kit';
+import { Box, Motion, Typography } from '@interest-protocol/ui-kit';
 import Link from 'next/link';
 import { FC } from 'react';
 
@@ -24,12 +24,47 @@ const Header: FC<HeaderProps> = ({ withLogo }) => (
       position="relative"
       alignItems="center"
       borderBottom="1px solid"
-      flexDirection="row-reverse"
       borderColor="outlineVariant"
       gridTemplateColumns="1fr 1fr"
       justifyContent="space-between"
       display={['none', 'none', 'none', 'flex']}
     >
+      <Link href={Routes[RoutesEnum.Swap]}>
+        <Motion
+          display="flex"
+          animation="auto"
+          overflow="hidden"
+          textAlign="center"
+          alignItems="center"
+          position="relative"
+          transition={{ duration: 0.5 }}
+          variants={{
+            collapsed: { width: '2.5rem ' },
+            unCollapsed: { width: 'auto' },
+          }}
+        >
+          <Box
+            display="flex"
+            minWidth="2.5rem"
+            minHeight="2.5rem"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <LogoSVG width="100%" maxWidth="2.5rem" maxHeight="2.5rem" />
+          </Box>
+          <Box ml="m">
+            <Typography
+              size="medium"
+              variant="title"
+              fontWeight="700"
+              color="onSurface"
+              width="max-content"
+            >
+              SUI COINS
+            </Typography>
+          </Box>
+        </Motion>
+      </Link>
       <Wallet />
       {withLogo && (
         <Link href={Routes[RoutesEnum.Swap]}>

@@ -8,7 +8,6 @@ import { ArrowTopRightSVG } from '@/svg';
 
 import MenuButton from '../wallet/menu-button';
 import { MainMenuMobileProps } from './menu.types';
-import MobileMenuList from './menu-list';
 import MenuSettingsList from './menu-settings';
 
 const MainMenu: FC<MainMenuMobileProps> = ({ closeMenu }) => (
@@ -32,7 +31,6 @@ const MainMenu: FC<MainMenuMobileProps> = ({ closeMenu }) => (
       <Typography m="xl" variant="title" size="small">
         Menu
       </Typography>
-      <MobileMenuList />
       {PARTNERS.map(({ link, name, img }) => (
         <Box
           my="l"
