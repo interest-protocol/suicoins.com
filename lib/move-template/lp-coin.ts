@@ -1,7 +1,7 @@
 import { bcs } from '@mysten/sui/bcs';
 import { fromHEX } from '@mysten/sui/utils';
 
-import { GetByteCodeArgs } from '@/views/pool-create/pool-create.types';
+import { ICreateTokenForm } from '@/views/create-token/create-token.types';
 
 import * as template from './move-bytecode-template';
 
@@ -49,7 +49,7 @@ const updateUrl = (modifiedByteCode: Uint8Array, url: string) =>
     'Vector(U8)'
   );
 
-export const getLpCoinBytecode = (info: GetByteCodeArgs) => {
+export const getLpCoinBytecode = (info: ICreateTokenForm) => {
   const templateByteCode = fromHEX(getLpCoinTemplateByteCode());
 
   const modifiedByteCode = template.update_identifiers(templateByteCode, {

@@ -5,12 +5,10 @@ import {
   useSuiClientContext,
   useSwitchAccount,
 } from '@mysten/dapp-kit';
-import { useRouter } from 'next/router';
 import { toPairs } from 'ramda';
 import { FC, ReactNode, useState } from 'react';
 import { v4 } from 'uuid';
 
-import { SIDEBAR_ITEMS } from '@/components/layout/sidebar/sidebar.data';
 import ConnectWalletButton from '@/components/wallet/connect-wallet-button';
 import { DISPLAY_NETWORK, Network, wrapperVariants } from '@/constants';
 import { useWeb3 } from '@/hooks/use-web3';
@@ -79,7 +77,6 @@ const MenuOptions: FC<MenuOptionsProps> = ({
   isMenuOpen,
   handleDisconnect,
 }) => {
-  const { asPath, push } = useRouter();
   const { network } = useSuiClientContext();
 
   const currentAccount = useCurrentAccount();
@@ -120,15 +117,6 @@ const MenuOptions: FC<MenuOptionsProps> = ({
               <Avatar withNameOrAddress />
             </OptionItem>
           )}
-          {SIDEBAR_ITEMS.map(({ path, name }) => (
-            <OptionItem
-              key={v4()}
-              selected={asPath == path}
-              onClick={() => path && push(path)}
-            >
-              {name}
-            </OptionItem>
-          ))}
           <OptionItem disabled>Settings</OptionItem>
           {currentAccount ? (
             <>
